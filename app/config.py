@@ -21,6 +21,8 @@ class Config(BaseSettings):
     RPM_LIMIT: int
     GPT_MODEL: str
 
+    X_API_KEY: str
+
 
 config = Config()
 
@@ -29,4 +31,3 @@ if Config().MODE == "PROD":
 
 else:
     REDIS_URL = "redis://127.0.0.1:6379/0"
-

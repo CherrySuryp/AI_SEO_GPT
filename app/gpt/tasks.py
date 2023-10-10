@@ -1,3 +1,5 @@
+import time
+
 from openai.error import ServiceUnavailableError
 
 from app.celery_app import celery

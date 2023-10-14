@@ -21,9 +21,10 @@ class TaskResult(BaseModel):
 @router.post("/gpt")
 async def send_gpt_task(prompt: str) -> TaskStatus:
     try:
-        task = send_gpt_task.delay(prompt)
+        task = send_gpt_task.delay(prompt=prompt)
         return TaskStatus.model_validate({"task_id": task.id})
-    except Exception:
+    except Exception as e:
+        print(e)
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail="Couldn't initiate the task.")
 
 

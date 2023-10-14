@@ -10,6 +10,7 @@ from app.gpt.service import ChatGPT
     rate_limit="120/m",
     autoretry_for=(ServiceUnavailableError,),
     retry_kwargs={'max_retries': 3},
+    default_retry_delay=5,
     soft_time_limit=60,
     time_limit=65
 )

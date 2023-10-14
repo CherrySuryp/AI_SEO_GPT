@@ -19,7 +19,7 @@ class TaskResult(BaseModel):
 
 
 @router.post("/gpt")
-async def parse_data(prompt: str) -> TaskStatus:
+async def send_gpt_task(prompt: str) -> TaskStatus:
     try:
         task = send_gpt_task.delay(prompt)
         return TaskStatus.model_validate({"task_id": task.id})

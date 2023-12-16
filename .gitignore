@@ -1,3 +1,4 @@
 .idea
 .env
 venv
+app.egg-info

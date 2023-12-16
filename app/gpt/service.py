@@ -1,25 +1,26 @@
 import openai
 from app.config import Config
 
+config = Config()
+
 
 class ChatGPT:
     """
     Работа с ChatGPT
     """
 
-    def __init__(self):
-        self.settings = Config()
-        openai.api_key = self.settings.OPENAI_KEY
+    def __init__(self, model: str = config.GPT_MODEL, openai_key: str = config.OPENAI_KEY):
+        self.model = model
+        openai.api_key = openai_key
 
     def send_request(self, prompt: str) -> str:
         """
         Отправляет запрос в ChatGPT и возвращает ответ
-        :param prompt: Запрос
         :return:
         """
         return (
             openai.ChatCompletion.create(
-                model=self.settings.GPT_MODEL,
+                model=self.model,
                 messages=[{"role": "user", "content": prompt}],
             )
             .choices[0]

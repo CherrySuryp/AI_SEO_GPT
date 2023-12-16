@@ -1,5 +1,3 @@
-import time
-
 from openai.error import ServiceUnavailableError
 
 from app.celery_app import celery
@@ -14,5 +12,9 @@ from app.gpt.service import ChatGPT
     soft_time_limit=60,
     time_limit=65
 )
-def send_gpt_task(prompt: str):
-    return ChatGPT().send_request(prompt)
+def gpt_generate_description_task(prompt: str, model: str):
+    gpt = ChatGPT(model=model)
+    result = gpt.send_request(prompt).replace("\n", "")
+    print(result)
+    print(type(result))
+    return result
